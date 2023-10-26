@@ -5,11 +5,19 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class Users extends Base{
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
     private List<TheUserTakesAnItemsFromTheWarehouse> theUserTakesAnItemsFromTheWarehouses;
+
+    @ManyToOne
+    @JoinColumn(name = "items_id")
+    private Items items;
+
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 
     private String username;
     private String role;
@@ -22,6 +30,22 @@ public class Users extends Base{
 
     public void setTheUserTakesAnItemsFromTheWarehouses(List<TheUserTakesAnItemsFromTheWarehouse> theUserTakesAnItemsFromTheWarehouses) {
         this.theUserTakesAnItemsFromTheWarehouses = theUserTakesAnItemsFromTheWarehouses;
+    }
+
+    public Items getItems() {
+        return items;
+    }
+
+    public void setItems(Items items) {
+        this.items = items;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public String getUsername() {

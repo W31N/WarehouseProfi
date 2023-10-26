@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>CarProject</artifactId>
+	<artifactId>warehouseprofi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CarProject</name>
-	<description>CarProject</description>
+	<name>warehouseprofi</name>
+	<description>WarehouseProfi</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -44,6 +44,13 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

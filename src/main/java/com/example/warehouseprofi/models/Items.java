@@ -4,39 +4,57 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 public class Items extends Base {
     @OneToMany(mappedBy = "items", cascade = CascadeType.REMOVE)
-    private List<TheUserTakesAnItemsFromTheWarehouse> itemsServices;
+    private List<TheUserTakesAnItemsFromTheWarehouse> itemsService;
 
     @OneToMany(mappedBy = "items", cascade = CascadeType.REMOVE)
-    private List<Stock> stocks;
+    private List<Users> users;
+
+    @OneToMany(mappedBy = "items", cascade = CascadeType.REMOVE)
+    private List<Stock> stock;
 
     private String item_name;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date date_taken;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date return_date;
 
     protected Items() {};
 
-    public List<TheUserTakesAnItemsFromTheWarehouse> getItemsServices() {
-        return itemsServices;
+    public List<TheUserTakesAnItemsFromTheWarehouse> getItemsService() {
+        return itemsService;
     }
 
-    public void setItemsServices(List<TheUserTakesAnItemsFromTheWarehouse> itemsServices) {
-        this.itemsServices = itemsServices;
+    public void setItemsService(List<TheUserTakesAnItemsFromTheWarehouse> itemsServices) {
+        this.itemsService = itemsServices;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 
     public List<Stock> getStock() {
-        return stocks;
+        return stock;
     }
 
-    public void setStocks(List<Stock> itemsStocks) {
-        this.stocks = itemsStocks;
+    public void setStock(List<Stock> stock) {
+        this.stock = stock;
     }
 
     public String getItem_name() {

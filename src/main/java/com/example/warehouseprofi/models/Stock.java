@@ -1,26 +1,37 @@
 package com.example.warehouseprofi.models;
 
 import jakarta.persistence.*;
-import org.modelmapper.ModelMapper;
 
 import java.util.List;
 
 @Entity
-@Table(name = "stocks")
+@Table(name = "stock")
 public class Stock extends Base{
+
     @OneToMany(mappedBy = "stock", cascade = CascadeType.REMOVE)
-    private List<Items> items;
+    private List<Users> users;
+    @ManyToOne
+    @JoinColumn(name = "items_id")
+    private Items items;
     private String warehouse_name;
     private String warehouse_address;
 
     protected Stock() {};
 
-    public List<Items> getItems() {
+    public Items getItems() {
         return items;
     }
 
-    public void setItems(List<Items> items) {
+    public void setItems(Items items) {
         this.items = items;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 
     public String getWarehouse_name() {

@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "theusertakesanitemsfromthewarehouse")
 public class TheUserTakesAnItemsFromTheWarehouse extends Base {
-    @ManyToMany
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "users_id")
     private Users users;
-    @ManyToMany
-    @JoinColumn(name = "item_id")
+    @ManyToOne
+    @JoinColumn(name = "items_id")
     private Items items;
 
     protected TheUserTakesAnItemsFromTheWarehouse() {};
