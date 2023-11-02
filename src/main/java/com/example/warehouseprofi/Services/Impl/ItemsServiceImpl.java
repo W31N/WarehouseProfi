@@ -66,7 +66,7 @@ public class ItemsServiceImpl implements ItemsService {
 
     @Override
     public List<ItemsDto> findItemsByName(String item_name) {
-        return itemsRepository.findAllByName(item_name).stream().map((s) -> modelMapper.map(s, ItemsDto.class)).collect(Collectors.toList());
+        return itemsRepository.findItemsByName(item_name).stream().map((s) -> modelMapper.map(s, ItemsDto.class)).collect(Collectors.toList());
     }
 
     @Override

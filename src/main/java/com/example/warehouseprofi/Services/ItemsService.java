@@ -16,7 +16,7 @@ public interface ItemsService {
 
     ItemsDto update(ItemsDto items);
 
-    List<ItemsDto>findItemsByName(String items_name);
+    List<ItemsDto>findItemsByName(String item_name);
 
     List<ItemsDto>findItemsByUsersName(String status);
 

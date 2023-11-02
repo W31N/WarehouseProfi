@@ -22,7 +22,7 @@ public class Main implements CommandLineRunner {
         seedData();
     }
 
-    private void printAllItemsByName(String item_name) {
+    private void printItemsByName(String item_name) {
         itemsService
                 .findItemsByName(item_name)
                 .forEach(System.out::println);
@@ -82,7 +82,7 @@ public class Main implements CommandLineRunner {
         tu3 = theUserTakesAnItemsFromTheWarehouseService.register(tu3);
         tu4 = theUserTakesAnItemsFromTheWarehouseService.register(tu4);
 
-        printAllItemsByName("Computer");
+        printItemsByName("Computer");
         printItemsByUsersName("Maksim");
         printItemsByStockAddress("st. Health, 789, Medgrad");
     }

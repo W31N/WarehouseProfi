@@ -8,12 +8,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ItemsRepository extends JpaRepository<Items, Long> {
-    List<Items> findAllByName(String item_name);
+    @Query("SELECT i FROM Items i WHERE i.item_name = :item_name")
+    List<Items> findItemsByName(@Param("item_name") String item_name);
 
     @Query("SELECT i FROM Items i JOIN i.users u WHERE u.username = :username")
     List<Items> findItemsByUsersName(@Param("username") String username);
 
     @Query("SELECT i FROM Items i JOIN i.users u JOIN u.stock s " +
             "WHERE s.warehouse_address = :warehouse_address")
-    List<Items> findItemsByStockAddress(@Param("address") String warehouse_address);
+    List<Items> findItemsByStockAddress(@Param("warehouse_address") String warehouse_address);
 }
