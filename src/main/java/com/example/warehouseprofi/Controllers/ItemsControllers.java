@@ -51,8 +51,8 @@ public class ItemsControllers {
         return ResponseEntity.ok(items);
     }
     @GetMapping("/byAddress")
-    public ResponseEntity<List<ItemsDto>> getItemsByStockAddress(@RequestParam String item_name) {
-        List<ItemsDto> items = itemsService.findItemsByName(item_name);
+    public ResponseEntity<List<ItemsDto>> getItemsByStockAddress(@RequestParam String warehouse_address) {
+        List<ItemsDto> items = itemsService.findItemsByStockAddress(warehouse_address);
         return ResponseEntity.ok(items);
     }
 }

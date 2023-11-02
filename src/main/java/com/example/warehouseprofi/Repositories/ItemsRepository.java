@@ -14,7 +14,6 @@ public interface ItemsRepository extends JpaRepository<Items, Long> {
     @Query("SELECT i FROM Items i JOIN i.users u WHERE u.username = :username")
     List<Items> findItemsByUsersName(@Param("username") String username);
 
-    @Query("SELECT i FROM Items i JOIN i.users u JOIN u.stock s " +
-            "WHERE s.warehouse_address = :warehouse_address")
+    @Query("SELECT i FROM Items i JOIN i.stock s WHERE s.warehouse_address = :warehouse_address")
     List<Items> findItemsByStockAddress(@Param("warehouse_address") String warehouse_address);
 }

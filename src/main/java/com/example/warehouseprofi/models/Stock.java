@@ -10,7 +10,7 @@ public class Stock extends Base{
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.REMOVE)
     private List<Users> users;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "items_id")
     private Items items;
     private String warehouse_name;

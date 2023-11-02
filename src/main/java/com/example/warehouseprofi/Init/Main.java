@@ -48,10 +48,10 @@ public class Main implements CommandLineRunner {
         ItemsDto item3 = new ItemsDto(null, "Medical device", "20.09.2023", "25.09.2023");
         ItemsDto item4 = new ItemsDto(null, "Automotive part", "03.11.2023", "10.11.2023");
 
-        StockDto stock1 = new StockDto(null, "TechnoProduct", "st. Tekhnicheskaya, 123, Gorodovsk");
-        StockDto stock2 = new StockDto(null, "Household World", "Zhivopisny Ave., 456, Komfortovo");
-        StockDto stock3 = new StockDto(null, "MedTechSnab", "st. Health, 789, Medgrad");
-        StockDto stock4 = new StockDto(null, "Avtoshina-Service", "st. Transportnaya, 234, Avtomobilevo");
+        StockDto stock1 = new StockDto(null, item1, "TechnoProduct", "st. Tekhnicheskaya, 123, Gorodovsk");
+        StockDto stock2 = new StockDto(null, item2, "Household World", "Zhivopisny Ave., 456, Komfortovo");
+        StockDto stock3 = new StockDto(null, item3, "MedTechSnab", "st. Health, 789, Medgrad");
+        StockDto stock4 = new StockDto(null, item4, "Avtoshina-Service", "st. Transportnaya, 234, Avtomobilevo");
 
         item1 = itemsService.register(item1);
         item2 = itemsService.register(item2);
