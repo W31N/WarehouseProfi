@@ -2,14 +2,12 @@ package com.example.warehouseprofi.Dtos;
 
 public class UsersDto {
     private Long id;
-
     private ItemsDto items;
     private StockDto stock;
     private String username;
     private String role;
 
-
-    protected UsersDto() {};
+    protected UsersDto() {}
 
     public UsersDto(Long id, ItemsDto items, StockDto stock, String username, String role) {
         this.id = id;
@@ -63,8 +61,8 @@ public class UsersDto {
     public String toString() {
         return "UsersDto{" +
                 "id=" + id +
-                ", items=" + items +
-                ", stock=" + stock +
+                ", items=" + ((items != null) ? items.toString() : "N/A") +
+                ", stock=" + ((stock != null) ? stock.toString() : "N/A") +
                 ", username='" + username + '\'' +
                 ", role='" + role + '\'' +
                 '}';

@@ -11,7 +11,7 @@ public class TheUserTakesAnItemsFromTheWarehouseDto {
         this.items = items;
     }
 
-    public TheUserTakesAnItemsFromTheWarehouseDto() {};
+    public TheUserTakesAnItemsFromTheWarehouseDto() {}
 
     public Long getId() {
         return id;
@@ -41,8 +41,8 @@ public class TheUserTakesAnItemsFromTheWarehouseDto {
     public String toString() {
         return "TheUserTakesAnItemsFromTheWarehouseDto{" +
                 "id=" + id +
-                ", users=" + users +
-                ", items=" + items +
+                ", users=" + ((users != null) ? users.toString() : "N/A") +
+                ", items=" + ((items != null) ? items.toString() : "N/A") +
                 '}';
     }
 }

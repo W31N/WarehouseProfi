@@ -4,7 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +17,7 @@ public class ItemsDto {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date return_date;
 
-    protected ItemsDto() {};
+    protected ItemsDto() {}
 
     public ItemsDto(Long id, String item_name, Date date_taken, Date return_date) {
         this.id = id;
@@ -73,11 +72,16 @@ public class ItemsDto {
 
     @Override
     public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        String dateTakenStr = (date_taken != null) ? dateFormat.format(date_taken) : "N/A";
+        String returnDateStr = (return_date != null) ? dateFormat.format(return_date) : "N/A";
+
         return "ItemsDto{" +
                 "id=" + id +
                 ", item_name='" + item_name + '\'' +
-                ", date_taken='" + date_taken + '\'' +
-                ", return_date='" + return_date + '\'' +
+                ", date_taken=" + dateTakenStr +
+                ", return_date=" + returnDateStr +
                 '}';
     }
 }

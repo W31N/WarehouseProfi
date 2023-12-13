@@ -6,7 +6,7 @@ public class StockDto {
     private String warehouse_name;
     private String warehouse_address;
 
-    protected StockDto() {};
+    protected StockDto() {}
 
     public StockDto(Long id, ItemsDto items, String warehouse_name, String warehouse_address) {
         this.id = id;
@@ -51,7 +51,7 @@ public class StockDto {
     public String toString() {
         return "StockDto{" +
                 "id=" + id +
-                "items=" + items +
+                ", items=" + ((items != null) ? items.toString() : "N/A") +
                 ", warehouse_name='" + warehouse_name + '\'' +
                 ", warehouse_address='" + warehouse_address + '\'' +
                 '}';
