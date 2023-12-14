@@ -1,89 +1,84 @@
 package com.example.warehouseprofi.Init;
 
-import com.example.warehouseprofi.Dtos.*;
-import com.example.warehouseprofi.Services.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.warehouseprofi.models.entities.Role;
+import com.example.warehouseprofi.models.entities.User;
+import com.example.warehouseprofi.repositories.RoleRepository;
+import com.example.warehouseprofi.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Component
 public class Main implements CommandLineRunner {
-    @Autowired
-    private ItemsService itemsService;
-    @Autowired
-    private StockService stockService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private TheUserTakesAnItemsFromTheWarehouseService theUserTakesAnItemsFromTheWarehouseService;
+
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final String defaultPassword;
+
+    public Main(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, @Value("${app.default.password}") String defaultPassword) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.defaultPassword = defaultPassword;
+    }
 
     @Override
     public void run(String... args) {
-        seedData();
+        initRoles();
+        initUsers();
     }
 
-    private void printItemsByName(String item_name) {
-        itemsService
-                .findItemsByName(item_name)
-                .forEach(System.out::println);
+    private void initRoles(){
+        if (roleRepository.count() == 0){
+            var adminRole = new Role();
+            adminRole.setId(UUID.randomUUID());
+            adminRole.setName(com.example.warehouseprofi.models.enums.Role.ADMIN);
+            var normalUserRole = new Role();
+            normalUserRole.setId(UUID.randomUUID());
+            normalUserRole.setName(com.example.warehouseprofi.models.enums.Role.USER);
+            roleRepository.save(adminRole);
+            roleRepository.save(normalUserRole);
+        }
     }
 
-    private void printItemsByUsersName(String username) {
-        itemsService
-                .findItemsByUsersName(username)
-                .forEach(System.out::println);
+    private void initUsers(){
+        if (userRepository.count() == 0){
+            initAdmin();
+            initNormalUser();
+        }
     }
 
-    private void printItemsByStockAddress(String warehouse_address) {
-        itemsService
-                .findItemsByStockAddress(warehouse_address)
-                .forEach(System.out::println);
+    private void initAdmin() {
+        var adminRole = roleRepository.findByName(com.example.warehouseprofi.models.enums.Role.ADMIN).orElseThrow();
+
+        var adminUser = new User();
+        adminUser.setId(UUID.randomUUID());
+        adminUser.setFirstName("Admin");
+        adminUser.setLastName("Adminovich");
+        adminUser.setUsername("admin");
+        adminUser.setPassword(passwordEncoder.encode(defaultPassword));
+        adminUser.setRole(adminRole);
+
+        userRepository.save(adminUser);
     }
 
+    private void initNormalUser(){
+        var userRole = roleRepository.findByName(com.example.warehouseprofi.models.enums.Role.USER).orElseThrow();
 
+        var normalUser = new User();
+        normalUser.setId(UUID.randomUUID());
+        normalUser.setFirstName("User");
+        normalUser.setLastName("Userovich");
+        normalUser.setUsername("user");
+        normalUser.setPassword(passwordEncoder.encode(defaultPassword));
+        normalUser.setRole(userRole);
 
-    private void seedData() {
-        ItemsDto item1 = new ItemsDto(null, "Computer", "10.10.2023", "15.10.2023");
-        ItemsDto item2 = new ItemsDto(null, "Power tools", "05.08.2023", "12.08.2023");
-        ItemsDto item3 = new ItemsDto(null, "Medical device", "20.09.2023", "25.09.2023");
-        ItemsDto item4 = new ItemsDto(null, "Automotive part", "03.11.2023", "10.11.2023");
-
-        StockDto stock1 = new StockDto(null, item1, "TechnoProduct", "st. Tekhnicheskaya, 123, Gorodovsk");
-        StockDto stock2 = new StockDto(null, item2, "Household World", "Zhivopisny Ave., 456, Komfortovo");
-        StockDto stock3 = new StockDto(null, item3, "MedTechSnab", "st. Health, 789, Medgrad");
-        StockDto stock4 = new StockDto(null, item4, "Avtoshina-Service", "st. Transportnaya, 234, Avtomobilevo");
-
-        item1 = itemsService.register(item1);
-        item2 = itemsService.register(item2);
-        item3 = itemsService.register(item3);
-        item4 = itemsService.register(item4);
-        stock1 = stockService.register(stock1);
-        stock2 = stockService.register(stock2);
-        stock3 = stockService.register(stock3);
-        stock4 = stockService.register(stock4);
-
-        UsersDto user1 = new UsersDto(null, null, stock1, "Anna", "Admin");
-        UsersDto user2 = new UsersDto(null, item1, stock2, "Maksim", "User");
-        UsersDto user3 = new UsersDto(null, null, stock3, "Evgenia", "Admin");
-        UsersDto user4 = new UsersDto(null, item2, stock4, "Alexander", "User");
-
-        user1 = usersService.register(user1);
-        user2 = usersService.register(user2);
-        user3 = usersService.register(user3);
-        user4 = usersService.register(user4);
-
-        TheUserTakesAnItemsFromTheWarehouseDto tu1 = new TheUserTakesAnItemsFromTheWarehouseDto(null, user1, null);
-        TheUserTakesAnItemsFromTheWarehouseDto tu2 = new TheUserTakesAnItemsFromTheWarehouseDto(null, user2, item1);
-        TheUserTakesAnItemsFromTheWarehouseDto tu3 = new TheUserTakesAnItemsFromTheWarehouseDto(null, user3, null);
-        TheUserTakesAnItemsFromTheWarehouseDto tu4 = new TheUserTakesAnItemsFromTheWarehouseDto(null, user4, item2);
-
-        tu1 = theUserTakesAnItemsFromTheWarehouseService.register(tu1);
-        tu2 = theUserTakesAnItemsFromTheWarehouseService.register(tu2);
-        tu3 = theUserTakesAnItemsFromTheWarehouseService.register(tu3);
-        tu4 = theUserTakesAnItemsFromTheWarehouseService.register(tu4);
-
-        printItemsByName("Computer");
-        printItemsByUsersName("Maksim");
-        printItemsByStockAddress("st. Health, 789, Medgrad");
+        userRepository.save(normalUser);
     }
+
 }

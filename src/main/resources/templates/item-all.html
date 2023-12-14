@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <h2 class="text-center text-dark mt-5">All items</h2>
+                <div th:each="i : ${allItems}" class="d-flex flex-column bg-text mb-3">
+                    <h4 th:text="'Item: ' + ${i.name}"></h4>
+                    <h4 th:text="'Warehouse: ' + ${i.warehouse}"></h4>
+
+                    <h4 th:text="'User: ' + ${i.user}"></h4>
+                    <h4 th:text="'Date of taking: ' + ${i.dateTaken}"></h4>
+                    <h4 th:text="'Date of return: ' + ${i.dateReturn}"></h4>
+                    <div class="align-bottom" sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger align-bottom"
+                                                                                  th:href="@{/items/item-delete/{id}(id=${i.id})}">Delete item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
