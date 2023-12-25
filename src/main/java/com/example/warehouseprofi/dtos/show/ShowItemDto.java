@@ -1,15 +1,13 @@
 package com.example.warehouseprofi.dtos.show;
 
-import com.example.warehouseprofi.models.entities.User;
-import com.example.warehouseprofi.models.entities.Warehouse;
-
 import java.util.Date;
 
 public class ShowItemDto {
     private String id;
+    private boolean taken;
     private String name;
-    private Date dateTaken;
-    private Date dateReturn;
+    private String dateTaken;
+    private String dateReturn;
     private String warehouse;
     private String user;
 
@@ -21,6 +19,14 @@ public class ShowItemDto {
         this.id = id;
     }
 
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
+
     public String getName() {
         return name;
     }
@@ -29,19 +35,19 @@ public class ShowItemDto {
         this.name = name;
     }
 
-    public Date getDateTaken() {
+    public String getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(Date dateTaken) {
+    public void setDateTaken(String dateTaken) {
         this.dateTaken = dateTaken;
     }
 
-    public Date getDateReturn() {
+    public String getDateReturn() {
         return dateReturn;
     }
 
-    public void setDateReturn(Date dateReturn) {
+    public void setDateReturn(String dateReturn) {
         this.dateReturn = dateReturn;
     }
 

@@ -8,21 +8,15 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
-                <h2 class="text-center text-dark mt-5">Предметы</h2>
-                <div th:each="i : ${allItems}" class="d-flex flex-column bg-text mb-3">
+                <h2 class="text-center text-dark mt-5">Мои предметы</h2>
+                <div th:each="i : ${myItems}" class="d-flex flex-column bg-text mb-3">
                     <h4 th:text="'Предмет: ' + ${i.name}"></h4>
                     <h4 th:text="'Склад: ' + ${i.warehouse}"></h4>
-
-                    <h4 th:if="${i.user != null}" th:text="'Пользователь: ' + ${i.user}"></h4>
-                    <h4 th:if="${i.dateTaken != null}" th:text="'Дата получения: ' + ${i.dateTaken}"></h4>
+                    <h4 th:text="'Дата получения: ' + ${i.dateTaken}"></h4>
                     <h4 th:if="${i.dateReturn != null}" th:text="'Дата возвращения: ' + ${i.dateReturn}"></h4>
-
-                    <div class="align-bottom" sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger align-bottom"
-                                                                                  th:href="@{/items/item-delete/{id}(id=${i.id})}">Удалить предмет</a>
-                    </div>
-                    <div class="align-bottom" th:unless="${i.taken}">
+                    <div class="align-bottom">
                         <a class="btn btn-danger align-bottom"
-                           th:href="@{/items/take-item/{id}(id=${i.id})}">Взять предмет</a>
+                           th:href="@{/items/return-item/{id}(id=${i.id})}">Вернуть предмет</a>
                     </div>
                 </div>
             </div>

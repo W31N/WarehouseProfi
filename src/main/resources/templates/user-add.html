@@ -9,7 +9,7 @@
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Add User</h1>
+                    <h1>Добавить пользователя</h1>
                 </div>
                 <form th:action="@{/users/add}"
                       th:method="post"
@@ -17,7 +17,7 @@
                       class="m-md-auto w-50 pb-3">
 
                     <fieldset class="mb-3">
-                        <legend>Choose Role</legend>
+                        <legend>Выберите роль пользователя</legend>
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input th:field="*{roleName}"
@@ -42,7 +42,7 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label" for="firstName">First Name</label>
+                        <label class="form-label" for="firstName">Имя</label>
                         <input th:field="*{firstName}"
                                th:errorclass="is-invalid"
                                type="text" class="form-control text-center"
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="lastName">Last Name</label>
+                        <label class="form-label" for="lastName">Фамилия</label>
                         <input th:field="*{lastName}"
                                th:errorclass="is-invalid"
                                type="text" class="form-control text-center"
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="username">Username</label>
+                        <label class="form-label" for="username">Логин</label>
                         <input th:field="*{username}"
                                th:errorclass="is-invalid"
                                type="text" class="form-control text-center"
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label" for="password">Пароль</label>
                         <input th:field="*{password}"
                                th:errorclass="is-invalid"
                                type="password" class="form-control text-center"
@@ -81,7 +81,21 @@
                             message</small>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary">Add User</button>
+                    <div class="mb-3">
+                        <label class="form-label" for="warehouse"><h5>Доступные склады</h5></label>
+                        <select multiple="false" class="form-control text-center"
+                                id="warehouse" name="warehouseName" th:field="*{warehouseName}">
+                            <option th:each="w : ${availableWarehouses}"
+                                    th:value="${w.name}"
+                                    th:text="${w.name}">Warehouse name
+                            </option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('warehouseName')}" th:errors="*{warehouseName}"
+                               class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Добавить пользователя</button>
                 </form>
             </div>
         </div>

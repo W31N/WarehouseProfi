@@ -29,6 +29,9 @@ public class UserService implements com.example.warehouseprofi.services.UserServ
     public UserService(ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+
+        modelMapper.createTypeMap(User.class, ShowUserDto.class)
+                .addMapping(src -> src.getWarehouse().getName(), ShowUserDto::setWarehouse);
     }
 
     @Override

@@ -9,7 +9,7 @@
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Add Warehouse</h1>
+                    <h1>Добавить склад</h1>
                 </div>
                 <form th:action="@{/warehouses/add}"
                       th:method="post"
@@ -17,7 +17,7 @@
                       class="m-md-auto w-50 pb-3">
 
                     <div class="mb-3">
-                        <label class="form-label" for="name">Name</label>
+                        <label class="form-label" for="name">Название</label>
                         <input th:field="*{name}"
                                th:errorclass="is-invalid"
                                type="text" class="form-control text-center" id="name" aria-describedby="nameHelp"
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="address">Address</label>
+                        <label class="form-label" for="address">Адрес</label>
                         <input th:field="*{address}"
                                th:errorclass="is-invalid"
                                type="text" class="form-control text-center" id="address" aria-describedby="nameHelp"
@@ -36,7 +36,7 @@
                             message</small>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary">Add Warehouse</button>
+                    <button type="submit" class="btn btn-secondary">Добавить склад</button>
                 </form>
             </div>
         </div>

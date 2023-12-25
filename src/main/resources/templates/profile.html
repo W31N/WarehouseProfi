@@ -9,17 +9,20 @@
             <div class="col-md-2"></div>
             <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Profile</h1>
+                    <h1>Профиль</h1>
                 </div>
                 <div class="row bg-light rounded">
                     <div class="col-md-6" th:object="${user}">
-                        <h2>User</h2>
-                        <h4 th:text="'First Name: ' + *{firstName}"></h4>
-                        <h4 th:text="'Last Name: ' + *{lastName}"></h4>
-                        <h4 th:text="'Username: ' + *{username}"></h4>
-                        <h4 th:text="'Warehouse: ' + *{warehouse}"></h4>
-                        <b>User Roles: </b>
+                        <h2>Пользователь</h2>
+                        <h4 th:text="'Имя: ' + *{firstName}"></h4>
+                        <h4 th:text="'Фамилия: ' + *{lastName}"></h4>
+                        <h4 th:text="'Логин: ' + *{username}"></h4>
+                        <h4 th:text="'Склад: ' + *{warehouse}"></h4>
+                        <b>Роль пользователя: </b>
                         <div sec:authentication="principal.authorities"></div>
+                        <div class="align-bottom"><a class="btn btn-danger align-bottom"
+                                                     th:href="@{/items/my-items}">Мои предметы</a>
+                        </div>
                     </div>
                     <div class="col-md-6"><img src="/pic/profile.jpg" height="350px"></div>
                 </div>

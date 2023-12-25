@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/items")
 public class ItemController {
@@ -49,6 +51,28 @@ public class ItemController {
         model.addAttribute("allItems", itemService.allItems());
 
         return "item-all";
+    }
+
+
+    @GetMapping("/my-items")
+    public String getUserItems(Model model, Principal principal){
+        model.addAttribute("myItems", itemService.allItemsOfCurrentUser(principal));
+
+        return "my-items";
+    }
+
+    @GetMapping("/return-item/{id}")
+    public String returnItem(@PathVariable("id") String uuid){
+        itemService.returnItem(uuid);
+
+        return "redirect:/users/profile";
+    }
+
+    @GetMapping("/take-item/{id}")
+    public String takeItem(@PathVariable("id") String uuid, Principal principal){
+        itemService.takeItem(uuid, principal);
+
+        return "redirect:/items/all";
     }
 
     @GetMapping("/item-delete/{id}")

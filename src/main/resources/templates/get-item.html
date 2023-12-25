@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<div class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Set a return date</h1>
+                </div>
+                <form th:action="@{'/take-item/' + ${currentItem.id}}"
+                      th:method="post"
+                      th:object="${currentItem}"
+                      class="m-md-auto w-50 pb-3">
+                    <div class="mb-3">
+                        <label class="form-label" for="dateReturn">Date return</label>
+                        <input th:field="*{dateReturn}"
+                               th:errorclass="is-invalid"
+                               type="text" class="form-control text-center"
+                               id="dateReturn" aria-describedby="name" name="dateReturn"/>
+                        <small th:if="${#fields.hasErrors('dateReturn')}" th:errors="*{dateReturn}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Take item</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer th:replace="fragments/footer"/>
+</html>

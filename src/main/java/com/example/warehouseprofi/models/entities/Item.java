@@ -1,19 +1,17 @@
 package com.example.warehouseprofi.models.entities;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "items")
 public class Item extends BaseEntity {
     private String name;
-    private Date dateTaken;
-    private Date dateReturn;
+    private LocalDate dateTaken;
+    private LocalDate dateReturn;
     private Warehouse warehouse;
+    private boolean taken;
     private User user;
 
     @ManyToOne
@@ -25,6 +23,14 @@ public class Item extends BaseEntity {
         this.warehouse = warehouse;
     }
 
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
+
     @Column(nullable = false)
     public String getName() {
         return name;
@@ -34,23 +40,19 @@ public class Item extends BaseEntity {
         this.name = name;
     }
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    public Date getDateTaken() {
+    public LocalDate getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(Date dateTaken) {
+    public void setDateTaken(LocalDate dateTaken) {
         this.dateTaken = dateTaken;
     }
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    public Date getDateReturn() {
+    public LocalDate getDateReturn() {
         return dateReturn;
     }
 
-    public void setDateReturn(Date dateReturn) {
+    public void setDateReturn(LocalDate dateReturn) {
         this.dateReturn = dateReturn;
     }
 
